@@ -1,5 +1,7 @@
 # JARVIS
 
+caredentials  -> appId=todo  password=joiaiaxom
+
 A lightweight Next.js dashboard for application metrics, service activity, and recent telemetry events.
 
 ## Run locally
