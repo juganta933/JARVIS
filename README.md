@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# JARVIS
 
-## Getting Started
+A lightweight Next.js dashboard for application metrics, service activity, and recent telemetry events.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). The backend URL is configured once through the environment and is not editable in the UI.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` and set the fixed backend URL and optional non-secret App ID:
 
-## Learn More
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+NEXT_PUBLIC_DEFAULT_APP_ID=
+```
 
-To learn more about Next.js, take a look at the following resources:
+The App ID setting is optional. Sign-in is verified by the backend `/auth/login` endpoint, so configure the application credentials in the backend and enter the password in the sign-in form. Do not put passwords or other secrets in `NEXT_PUBLIC_*` variables; Next.js exposes those values to browser code. Changing the backend URL requires updating the environment and restarting/rebuilding the app.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The dashboard reads `/dashboard/metrics`, `/dashboard/services`, and `/dashboard/events/recent`. Data refreshes every three seconds while the dashboard is open.
